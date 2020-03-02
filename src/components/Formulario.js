@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled'
 
+import useMoneda from '../hooks/useMoneda'
+
 const Boton = styled.input`
   margin-top: 20px;
   font-weight: bold;
@@ -11,27 +13,26 @@ const Boton = styled.input`
   width: 100%;
   border-radius: 10px;
   color: #fff;
-  transition: background-color .3s ease;
-  
+  transition: background-color 0.3s ease;
+  outline:none;
   &:hover {
-      background-color: #326AC0;
-      cursor: pointer;
+    background-color: #326ac0;
+    cursor: pointer;
   }
 `;
 
 const Formulario = () => {
-    return ( 
 
-        <form>
-            <Boton 
-                type = 'submit'
-                value = 'Calcular'
+    //utilizar useMoneda
+    const [Moneda, SelectMoneda, ActualizarState] = useMoneda()
 
-            />
-            
-        </form>
 
-     );
+    return (
+      <form>
+        <SelectMoneda />
+        <Boton type="submit" value="Calcular" />
+      </form>
+    );
 }
  
 export default Formulario;

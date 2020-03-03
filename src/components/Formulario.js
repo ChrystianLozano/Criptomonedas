@@ -23,13 +23,21 @@ const Boton = styled.input`
 
 const Formulario = () => {
 
+    const MONEDAS = [
+      {codigo: 'USD', nombre: 'Dolar de Estados Unidos'},
+      {codigo: 'MXN', nombre: 'Peso Mexicano'},
+      {codigo: 'EUR', nombre: 'Euro'},
+      {codigo: 'GBP', nombre: 'Libra Esterlina'}
+    ]
+
+
     //utilizar useMoneda
-    const [Moneda, SelectMoneda, ActualizarState] = useMoneda()
+    const [Moneda, SelectMonedas, ActualizarState] = useMoneda('Elige tu moneda', '', MONEDAS)
 
 
     return (
       <form>
-        <SelectMoneda />
+        <SelectMonedas />
         <Boton type="submit" value="Calcular" />
       </form>
     );

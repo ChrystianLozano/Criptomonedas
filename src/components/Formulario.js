@@ -31,6 +31,8 @@ const Formulario = () => {
 
   ])
 
+  const[error, actualizarError] = useState(false)
+
     const MONEDAS = [
       {codigo: 'USD', nombre: 'Dolar de Estados Unidos'},
       {codigo: 'MXN', nombre: 'Peso Mexicano'},
@@ -44,7 +46,7 @@ const Formulario = () => {
 
 
     //utilizar useCriptomonedas
-    const[critomoneda, SelectCripto] = useCriptomoneda('Elige tu Criptomoneda', '', listacripto)
+    const[criptomoneda, SelectCripto] = useCriptomoneda('Elige tu Criptomoneda', '', listacripto)
 
 
     //ejecutar llamado a la API
@@ -60,8 +62,30 @@ const Formulario = () => {
       consultarAPI()
     }, [])
 
-    return (
-      <form>
+
+
+
+      //cuando el usuario hace submit
+      const cotizarMoneda = e => {
+        e.preventDefault();
+        //validar si ambos campos estan llenos
+        if(Moneda === '' || criptomoneda === ''){
+          actualizarError(true)
+          return
+        }
+
+        //caso contraio pasar los datos al  componente principal
+        actualizarError(false)
+      }
+
+
+    return (    
+      <form
+        onSubmit = {cotizarMoneda}
+      >
+
+        {error ? 'Hay un error': null}
+
         <SelectCripto />
         <SelectMonedas />
         <Boton type="submit" value="Calcular" />
